@@ -1,0 +1,397 @@
+/*
+Theme Name: SIGA Theme
+Author: Grupo SIGA - UNLaR
+Description: Tema personalizado para el Sistema Inteligente de Gestión del Agua.
+Version: 1.0
+Text Domain: siga-theme
+*/
+
+:root {
+    --color-principal: #0D47A1;
+    --color-secundario: #00ACC1;
+    --color-fondo: #F4F9FC;
+    --color-texto: #1F2937;
+    --color-blanco: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+header {
+    background-color: var(--color-principal);
+    color: var(--color-blanco);
+    padding: 20px 40px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+main {
+    padding: 40px;
+}
+
+footer {
+    background-color: var(--color-principal);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 20px;
+}
+.site-header {
+     background-color: var(--color-principal);
+    color: var(--color-principal);
+    padding: 20px 30px;
+    border-bottom: none;
+}
+
+.header-container {
+      max-width: 1200px;
+    margin: 0 auto;
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    background-color: var(--color-blanco);
+    border-radius: 18px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.logo h1 {
+    font-size: 30px;
+    margin: 0;
+    color: var(--color-principal);
+}
+
+.logo p {
+    font-size: 12px;
+    margin: 0;
+    color: #64748b;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: var(--color-principal);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.main-nav a:hover {
+    color: var(--color-secundario);
+}
+
+.btn-acceder {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-acceder:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .header-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+/* HERO - PORTADA PRINCIPAL */
+
+.hero {
+    background: linear-gradient(120deg, #eaf8ff, #d1f0fa);
+    padding: 100px 40px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-contenedor {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero-texto {
+    max-width: 650px;
+}
+
+.hero-texto h1 {
+    font-size: 56px;
+    line-height: 1.15;
+    color: #12345a;
+    margin: 0 0 25px;
+}
+
+.hero-texto h1 span {
+    color: #00acc1;
+}
+
+.hero-texto p {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 30px;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.boton-principal,
+.boton-secundario {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.boton-principal {
+    background-color: #0d47a1;
+    color: white;
+}
+
+.boton-principal:hover {
+    background-color: #083579;
+    color: white;
+}
+
+.boton-secundario {
+    background-color: white;
+    color: #0d47a1;
+    border: 2px solid #0d47a1;
+}
+
+.boton-secundario:hover {
+    background-color: #e3f2fd;
+}
+
+/* Adaptacion a celulares */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 20px;
+        min-height: auto;
+    }
+
+    .hero-texto h1 {
+        font-size: 36px;
+    }
+
+    .hero-texto p {
+        font-size: 17px;
+    }
+}
+
+/* DASHBOARD DEL HERO */
+
+.hero-dashboard {
+    background-color: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 15px 35px rgba(13, 71, 161, 0.12);
+    border: 1px solid #e2edf5;
+    min-width: 0;
+}
+
+.dashboard-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #0d47a1;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.dashboard-consumo {
+    background-color: #f1f9ff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-consumo p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.dashboard-consumo h3 {
+    font-size: 36px;
+    color: #12345a;
+    margin: 8px 0;
+}
+
+.dashboard-consumo small {
+    color: #64748b;
+}
+
+.dashboard-grafico {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 140px;
+    margin-bottom: 20px;
+}
+
+.dashboard-grafico span {
+    flex: 1;
+    background: linear-gradient(180deg, #38bdf8, #0d47a1);
+    border-radius: 8px 8px 0 0;
+}
+
+.dashboard-estados {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.dashboard-estados div {
+    background-color: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.dashboard-estados p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 8px;
+}
+
+.dashboard-estados strong {
+    color: #0d47a1;
+    font-size: 18px;
+}
+@media (max-width: 900px) {
+    .hero-contenedor {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero-dashboard {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-dashboard {
+        padding: 18px;
+    }
+
+    .dashboard-grafico {
+        gap: 7px;
+    }
+
+    .dashboard-estados {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* SECCION DE SERVICIOS */
+
+.servicios {
+    padding: 70px 30px;
+    background-color: #f4f9fc;
+}
+
+.servicios-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.servicios h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #12345a;
+    margin-bottom: 40px;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.servicio-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.servicio-card:hover {
+    transform: translateY(-5px);
+}
+
+.servicio-icono {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.servicio-card h3 {
+    color: #0d47a1;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.servicio-card p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .servicios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+}
