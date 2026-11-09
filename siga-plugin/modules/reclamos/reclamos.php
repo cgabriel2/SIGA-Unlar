@@ -239,3 +239,123 @@ add_shortcode(
     'siga_nuevo_reclamo',
     'siga_mostrar_formulario_reclamo'
 );
+
+
+/**
+ * SIGA - Mostrar los reclamos del usuario.
+ */
+function siga_mostrar_mis_reclamos() {
+
+    if (!is_user_logged_in()) {
+        return '<p>Debés iniciar sesión para consultar tus reclamos.</p>';
+    }
+
+    global $wpdb;
+
+    $usuario_id = get_current_user_id();
+    $tabla = $wpdb->prefix . 'siga_reclamos';
+
+    // Consultamos los reclamos del usuario conectado.
+    $reclamos = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT id, tipo, descripcion, estado, created_at
+             FROM {$tabla}
+             WHERE usuario_id = %d
+             ORDER BY created_at DESC, id DESC",
+            $usuario_id
+        )
+    );
+
+    if ($reclamos === null) {
+        return '<p>No se pudieron consultar los reclamos.</p>';
+    }
+
+    if (empty($reclamos)) {
+        return '<p>Todavía no registraste ningún reclamo.</p>';
+    }
+
+    $tipos = [
+        'falta_agua'   => 'Falta de agua',
+        'baja_presion' => 'Baja presión',
+        'perdida'      => 'Pérdida de agua',
+        'otro'         => 'Otro problema'
+    ];
+
+    $estados = [
+        'pendiente'  => 'Pendiente',
+        'en_proceso' => 'En proceso',
+        'resuelto'   => 'Resuelto'
+    ];
+
+    ob_start();
+    ?>
+
+    <h2>Mis reclamos</h2>
+
+    <table style="width:100%; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>N.º</th>
+                <th>Problema</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($reclamos as $reclamo): ?>
+                <tr>
+                    <td><?php echo esc_html($reclamo->id); ?></td>
+
+                    <td>
+                        <?php
+                        echo esc_html(
+                            $tipos[$reclamo->tipo]
+                            ?? $reclamo->tipo
+                        );
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                        echo esc_html(
+                            $reclamo->descripcion
+                        );
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                        echo esc_html(
+                            $estados[$reclamo->estado]
+                            ?? $reclamo->estado
+                        );
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                        echo esc_html(
+                            mysql2date(
+                                'd/m/Y H:i',
+                                $reclamo->created_at
+                            )
+                        );
+                        ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <?php
+
+    return ob_get_clean();
+}
+
+// Registramos el shortcode.
+add_shortcode(
+    'siga_mis_reclamos',
+    'siga_mostrar_mis_reclamos'
+);
