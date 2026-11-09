@@ -544,3 +544,156 @@ function siga_tabla_gestion_cortes() {
 
     echo '</tbody></table>';
 }
+
+
+/**
+ * SIGA - Avisos personalizados según los barrios
+ * de las viviendas del usuario conectado.
+ */
+function siga_mostrar_avisos_mi_barrio() {
+
+    // El usuario debe estar autenticado.
+    if (!is_user_logged_in()) {
+        return '<p>Iniciá sesión para consultar los avisos de tus barrios.</p>';
+    }
+
+    global $wpdb;
+
+    $usuario_id = get_current_user_id();
+
+    $tabla_viviendas = $wpdb->prefix . 'siga_viviendas';
+    $tabla_barrios = $wpdb->prefix . 'siga_barrios';
+    $tabla_cortes = $wpdb->prefix . 'siga_cortes';
+
+    // Comprobamos si tiene viviendas registradas.
+    $cantidad_viviendas = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*)
+             FROM {$tabla_viviendas}
+             WHERE usuario_id = %d",
+            $usuario_id
+        )
+    );
+
+    if ($cantidad_viviendas == 0) {
+        return '<p>Primero necesitás registrar una vivienda para consultar los avisos de tu barrio.</p>';
+    }
+
+    $ahora = current_time('mysql');
+
+    // Buscar cortes en los barrios de sus viviendas.
+    $cortes = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT
+                c.id,
+                c.inicio,
+                c.fin_previsto,
+                c.descripcion,
+                c.estado,
+                b.nombre AS barrio
+             FROM {$tabla_cortes} AS c
+             INNER JOIN {$tabla_barrios} AS b
+                ON b.id = c.barrio_id
+             WHERE (
+                 (
+                     c.estado = %s
+                     AND (
+                         c.fin_previsto IS NULL
+                         OR c.fin_previsto >= %s
+                     )
+                 )
+                 OR c.estado = %s
+             )
+             AND EXISTS (
+                 SELECT 1
+                 FROM {$tabla_viviendas} AS v
+                 WHERE v.barrio_id = c.barrio_id
+                   AND v.usuario_id = %d
+             )
+             ORDER BY c.inicio ASC
+             LIMIT 100",
+            'programado',
+            $ahora,
+            'en_curso',
+            $usuario_id
+        )
+    );
+
+    if ($cortes === null) {
+        return '<p>No se pudieron consultar los avisos.</p>';
+    }
+
+    if (empty($cortes)) {
+        return '<p>No hay cortes activos o próximos registrados para los barrios de tus viviendas.</p>';
+    }
+
+    $estados = [
+        'programado' => 'Programado',
+        'en_curso' => 'En curso'
+    ];
+
+    ob_start();
+    ?>
+
+    <div class="siga-avisos-personalizados">
+
+        <h2>Avisos de mis barrios</h2>
+
+        <?php foreach ($cortes as $corte): ?>
+
+            <article style="
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 15px;
+            ">
+                <h3>
+                    <?php echo esc_html($corte->barrio); ?>
+                </h3>
+
+                <p>
+                    <strong>Estado:</strong>
+                    <?php echo esc_html(
+                        $estados[$corte->estado] ?? $corte->estado
+                    ); ?>
+                </p>
+
+                <p>
+                    <strong>Motivo:</strong>
+                    <?php echo esc_html($corte->descripcion); ?>
+                </p>
+
+                <p>
+                    <strong>Inicio:</strong>
+                    <?php echo esc_html(
+                        mysql2date('d/m/Y H:i', $corte->inicio)
+                    ); ?>
+                </p>
+
+                <p>
+                    <strong>Finalización estimada:</strong>
+                    <?php
+                    echo $corte->fin_previsto
+                        ? esc_html(
+                            mysql2date(
+                                'd/m/Y H:i',
+                                $corte->fin_previsto
+                            )
+                        )
+                        : 'Sin estimación';
+                    ?>
+                </p>
+            </article>
+
+        <?php endforeach; ?>
+
+    </div>
+
+    <?php
+    return ob_get_clean();
+}
+
+add_shortcode(
+    'siga_avisos_mi_barrio',
+    'siga_mostrar_avisos_mi_barrio'
+);
