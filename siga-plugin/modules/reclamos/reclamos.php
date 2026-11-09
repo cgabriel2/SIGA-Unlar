@@ -300,6 +300,7 @@ function siga_mostrar_mis_reclamos() {
                 <th>Descripción</th>
                 <th>Estado</th>
                 <th>Fecha</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -344,6 +345,35 @@ function siga_mostrar_mis_reclamos() {
                         );
                         ?>
                     </td>
+                    
+                <td>
+                    <?php
+                    // Buscamos la página de seguimiento por su ID local.
+                    $pagina_seguimiento = get_page_by_path(
+                        'seguimiento-de-reclamo'
+                    );
+
+                    if ($pagina_seguimiento) {
+
+                        // Construimos una URL diferente para cada reclamo.
+                        $url_historial = add_query_arg(
+                            'reclamo_id',
+                            absint($reclamo->id),
+                            get_permalink($pagina_seguimiento->ID)
+                        );
+                        ?>
+
+                        <a href="<?php echo esc_url($url_historial); ?>">
+                            Ver seguimiento
+                        </a>
+
+                    <?php } else { ?>
+
+                        <span>Seguimiento no disponible</span>
+
+                    <?php } ?>
+                </td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -634,3 +664,147 @@ function siga_panel_gestion_reclamos() {
 
     echo '</div>';
 }
+
+
+/**
+ * SIGA - Historial de seguimiento de un reclamo.
+ */
+function siga_mostrar_historial_reclamo() {
+
+    if (!is_user_logged_in()) {
+        return '<p>Debés iniciar sesión.</p>';
+    }
+
+    global $wpdb;
+
+    $usuario_id = get_current_user_id();
+    $tabla_reclamos = $wpdb->prefix . 'siga_reclamos';
+    $tabla_seguimiento = $wpdb->prefix . 'siga_seguimiento';
+
+    // Recuperamos el reclamo solicitado.
+    $reclamo_id = isset($_GET['reclamo_id'])
+        ? absint($_GET['reclamo_id'])
+        : 0;
+
+    if (!$reclamo_id) {
+        return '<p>Seleccioná un reclamo para ver su historial.</p>';
+    }
+
+    // Solo permitimos consultar reclamos propios.
+    $reclamo = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT id, tipo, estado, created_at
+             FROM {$tabla_reclamos}
+             WHERE id = %d AND usuario_id = %d",
+            $reclamo_id,
+            $usuario_id
+        )
+    );
+
+    if (!$reclamo) {
+        return '<p>No se encontró el reclamo o no tenés acceso.</p>';
+    }
+
+    // Recuperamos los movimientos del reclamo.
+    $movimientos = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT estado, comentario, created_at
+             FROM {$tabla_seguimiento}
+             WHERE reclamo_id = %d
+             ORDER BY created_at ASC, id ASC",
+            $reclamo_id
+        )
+    );
+
+    if ($movimientos === null) {
+        return '<p>No se pudo consultar el historial.</p>';
+    }
+
+    $estados = [
+        'pendiente' => 'Pendiente',
+        'en_proceso' => 'En proceso',
+        'resuelto' => 'Resuelto'
+    ];
+
+    ob_start();
+    ?>
+
+    <section class="siga-historial">
+
+        <h2>
+            Historial del reclamo
+            #<?php echo esc_html($reclamo->id); ?>
+        </h2>
+
+        <p>
+            <strong>Estado actual:</strong>
+            <?php
+            echo esc_html(
+                $estados[$reclamo->estado] ?? $reclamo->estado
+            );
+            ?>
+        </p>
+
+        <h3>Movimientos</h3>
+
+        <ol>
+            <li>
+                <strong>Reclamo registrado</strong>
+                <p>
+                    <?php
+                    echo esc_html(
+                        mysql2date(
+                            'd/m/Y H:i',
+                            $reclamo->created_at
+                        )
+                    );
+                    ?>
+                </p>
+                <p>El vecino realizó el reclamo.</p>
+            </li>
+
+            <?php foreach ($movimientos as $movimiento): ?>
+                <li>
+                    <strong>
+                        <?php
+                        echo esc_html(
+                            $estados[$movimiento->estado]
+                            ?? $movimiento->estado
+                        );
+                        ?>
+                    </strong>
+
+                    <p>
+                        <?php
+                        echo esc_html(
+                            mysql2date(
+                                'd/m/Y H:i',
+                                $movimiento->created_at
+                            )
+                        );
+                        ?>
+                    </p>
+
+                    <?php if (!empty($movimiento->comentario)): ?>
+                        <p>
+                            <?php
+                            echo esc_html(
+                                $movimiento->comentario
+                            );
+                            ?>
+                        </p>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+
+    </section>
+
+    <?php
+    return ob_get_clean();
+}
+
+add_shortcode(
+    'siga_historial_reclamo',
+    'siga_mostrar_historial_reclamo'
+);
