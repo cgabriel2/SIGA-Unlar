@@ -359,3 +359,278 @@ add_shortcode(
     'siga_mis_reclamos',
     'siga_mostrar_mis_reclamos'
 );
+
+/**
+ * SIGA - Panel administrativo de reclamos.
+ */
+
+// Agregamos una opción dentro del menú SIGA.
+add_action('admin_menu', function () {
+    add_submenu_page(
+        'siga-panel',
+        'Gestión de reclamos',
+        'Gestión de reclamos',
+        'manage_options',
+        'siga-reclamos',
+        'siga_panel_gestion_reclamos'
+    );
+}, 20);
+
+
+/**
+ * Procesar un cambio de estado.
+ */
+add_action(
+    'admin_post_siga_actualizar_reclamo',
+    'siga_actualizar_reclamo'
+);
+
+function siga_actualizar_reclamo() {
+
+    // Solo un administrador puede realizar cambios.
+    if (!current_user_can('manage_options')) {
+        wp_die('No tenés permisos para modificar reclamos.');
+    }
+
+    $reclamo_id = isset($_POST['reclamo_id'])
+        ? absint($_POST['reclamo_id'])
+        : 0;
+
+    // Verificamos el token del formulario.
+    check_admin_referer(
+        'siga_actualizar_' . $reclamo_id,
+        'siga_nonce'
+    );
+
+    $estado = isset($_POST['estado'])
+        ? sanitize_key(wp_unslash($_POST['estado']))
+        : '';
+
+    $comentario = isset($_POST['comentario'])
+        ? sanitize_textarea_field(
+            wp_unslash($_POST['comentario'])
+        )
+        : '';
+
+    $estados_validos = [
+        'pendiente',
+        'en_proceso',
+        'resuelto'
+    ];
+
+    if (
+        $reclamo_id <= 0 ||
+        !in_array($estado, $estados_validos, true) ||
+        mb_strlen($comentario) > 1000
+    ) {
+        wp_die('Los datos enviados no son válidos.');
+    }
+
+    global $wpdb;
+
+    $tabla_reclamos = $wpdb->prefix . 'siga_reclamos';
+    $tabla_seguimiento = $wpdb->prefix . 'siga_seguimiento';
+
+    // Iniciamos una transacción para guardar ambas
+    // operaciones juntas o cancelar ambas.
+    if ($wpdb->query('START TRANSACTION') === false) {
+        wp_die('No se pudo iniciar la operación.');
+    }
+
+    // Bloqueamos el reclamo durante la actualización.
+    $reclamo = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT id, estado
+             FROM {$tabla_reclamos}
+             WHERE id = %d FOR UPDATE",
+            $reclamo_id
+        )
+    );
+
+    if (!$reclamo) {
+        $wpdb->query('ROLLBACK');
+        wp_die('El reclamo no existe.');
+    }
+
+    // Evitamos guardar movimientos vacíos.
+    if ($reclamo->estado === $estado && $comentario === '') {
+        $wpdb->query('ROLLBACK');
+        wp_die('No hay cambios para guardar.');
+    }
+
+    $fecha = current_time('mysql');
+
+    // Primera operación: actualizar el reclamo.
+    $actualizado = $wpdb->update(
+        $tabla_reclamos,
+        [
+            'estado' => $estado,
+            'updated_at' => $fecha
+        ],
+        ['id' => $reclamo_id],
+        ['%s', '%s'],
+        ['%d']
+    );
+
+    // Segunda operación: registrar el historial.
+    $seguimiento = false;
+
+    if ($actualizado !== false) {
+        $seguimiento = $wpdb->insert(
+            $tabla_seguimiento,
+            [
+                'reclamo_id' => $reclamo_id,
+                'actor_id' => get_current_user_id(),
+                'estado' => $estado,
+                'comentario' => $comentario,
+                'created_at' => $fecha
+            ],
+            ['%d', '%d', '%s', '%s', '%s']
+        );
+    }
+
+    if ($actualizado === false || $seguimiento === false) {
+        $wpdb->query('ROLLBACK');
+        wp_die('No se pudo guardar el cambio.');
+    }
+
+    if ($wpdb->query('COMMIT') === false) {
+        wp_die('No se pudo confirmar la operación.');
+    }
+
+    // Volvemos al panel con mensaje de éxito.
+    wp_safe_redirect(
+        add_query_arg(
+            [
+                'page' => 'siga-reclamos',
+                'actualizado' => '1'
+            ],
+            admin_url('admin.php')
+        )
+    );
+    exit;
+}
+
+
+/**
+ * Mostrar la administración de reclamos.
+ */
+function siga_panel_gestion_reclamos() {
+
+    if (!current_user_can('manage_options')) {
+        wp_die('Acceso denegado.');
+    }
+
+    global $wpdb;
+
+    $tabla = $wpdb->prefix . 'siga_reclamos';
+
+    $reclamos = $wpdb->get_results(
+        "SELECT id, tipo, descripcion, estado, created_at
+         FROM {$tabla}
+         ORDER BY created_at DESC, id DESC
+         LIMIT 100"
+    );
+
+    $estados = [
+        'pendiente' => 'Pendiente',
+        'en_proceso' => 'En proceso',
+        'resuelto' => 'Resuelto'
+    ];
+
+    $tipos = [
+        'falta_agua' => 'Falta de agua',
+        'baja_presion' => 'Baja presión',
+        'perdida' => 'Pérdida de agua',
+        'otro' => 'Otro problema'
+    ];
+
+    echo '<div class="wrap">';
+    echo '<h1>SIGA - Gestión de reclamos</h1>';
+
+    if (
+        isset($_GET['actualizado']) &&
+        sanitize_key(wp_unslash($_GET['actualizado'])) === '1'
+    ) {
+        echo '<div class="notice notice-success"><p>';
+        echo 'Reclamo actualizado correctamente.';
+        echo '</p></div>';
+    }
+
+    if ($reclamos === null) {
+        echo '<p>Error al consultar los reclamos.</p>';
+    } elseif (empty($reclamos)) {
+        echo '<p>Todavía no hay reclamos registrados.</p>';
+    } else {
+        echo '<table class="widefat striped">';
+        echo '<thead><tr>';
+        echo '<th>ID</th>';
+        echo '<th>Problema</th>';
+        echo '<th>Descripción</th>';
+        echo '<th>Estado actual</th>';
+        echo '<th>Actualizar</th>';
+        echo '</tr></thead><tbody>';
+
+        foreach ($reclamos as $reclamo) {
+
+            echo '<tr>';
+
+            echo '<td>' . esc_html($reclamo->id) . '</td>';
+
+            echo '<td>' . esc_html(
+                $tipos[$reclamo->tipo] ?? $reclamo->tipo
+            ) . '</td>';
+
+            echo '<td>' . esc_html(
+                $reclamo->descripcion
+            ) . '</td>';
+
+            echo '<td>' . esc_html(
+                $estados[$reclamo->estado] ?? $reclamo->estado
+            ) . '</td>';
+
+            echo '<td>';
+
+            echo '<form method="post" action="' .
+                esc_url(admin_url('admin-post.php')) . '">';
+
+            echo '<input type="hidden" name="action"
+                   value="siga_actualizar_reclamo">';
+
+            echo '<input type="hidden" name="reclamo_id"
+                   value="' . esc_attr($reclamo->id) . '">';
+
+            wp_nonce_field(
+                'siga_actualizar_' . $reclamo->id,
+                'siga_nonce'
+            );
+
+            echo '<select name="estado">';
+
+            foreach ($estados as $valor => $etiqueta) {
+                echo '<option value="' . esc_attr($valor) . '" ' .
+                    selected($reclamo->estado, $valor, false) . '>' .
+                    esc_html($etiqueta) .
+                    '</option>';
+            }
+
+            echo '</select>';
+
+            echo '<p><textarea name="comentario"
+                   rows="2" maxlength="1000"
+                   placeholder="Observación"></textarea></p>';
+
+            echo '<button type="submit" class="button button-primary">
+                    Guardar cambio
+                  </button>';
+
+            echo '</form>';
+            echo '</td>';
+            echo '</tr>';
+        }
+
+        echo '</tbody></table>';
+    }
+
+    echo '</div>';
+}
