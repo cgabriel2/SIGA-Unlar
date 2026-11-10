@@ -753,3 +753,202 @@ footer {
     color: #00ACC1;
     text-decoration: underline;
 }
+
+/* =========================================
+   SIGA - DISEÑO DEL MODULO MIS VIVIENDAS
+   PC4 - ESTILOS SIN MODIFICAR EL PHP DE PC1
+========================================= */
+
+.pagina-contenido:has(#siga_barrio) {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.06);
+    color: #334155;
+}
+
+/* TITULOS */
+
+.pagina-contenido:has(#siga_barrio) h2 {
+    color: #12345a;
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 22px;
+}
+
+/* FORMULARIO */
+
+.pagina-contenido:has(#siga_barrio) form {
+    background: #f8fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 35px;
+}
+
+.pagina-contenido:has(#siga_barrio) form p {
+    margin-bottom: 22px;
+}
+
+/* ETIQUETAS */
+
+.pagina-contenido:has(#siga_barrio) label {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    color: #334155;
+    margin-bottom: 9px;
+}
+
+/* CAMPOS DEL FORMULARIO */
+
+.pagina-contenido:has(#siga_barrio) select,
+.pagina-contenido:has(#siga_barrio) input[type="text"] {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 15px;
+    color: #334155;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.pagina-contenido:has(#siga_barrio) select:focus,
+.pagina-contenido:has(#siga_barrio) input[type="text"]:focus {
+    border-color: #00acc1;
+    box-shadow: 0 0 0 3px rgba(0, 172, 193, 0.12);
+}
+
+/* BOTON PRINCIPAL */
+
+.pagina-contenido:has(#siga_barrio) button[type="submit"] {
+    background: #0d47a1;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease,
+                transform 0.2s ease;
+}
+
+.pagina-contenido:has(#siga_barrio) button[type="submit"]:hover {
+    background: #083579;
+    transform: translateY(-2px);
+}
+
+.pagina-contenido:has(#siga_barrio) button[type="submit"]:focus-visible {
+    outline: 3px solid #00acc1;
+    outline-offset: 3px;
+}
+
+/* ENLACES DEL FORMULARIO */
+
+.pagina-contenido:has(#siga_barrio) form a {
+    color: #0d47a1;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 12px;
+}
+
+.pagina-contenido:has(#siga_barrio) form a:hover {
+    text-decoration: underline;
+}
+
+/* TABLA DE VIVIENDAS */
+
+.pagina-contenido:has(#siga_barrio) table {
+    width: 100%;
+    border: none;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.pagina-contenido:has(#siga_barrio) table thead {
+    background: #e8f0fe;
+}
+
+.pagina-contenido:has(#siga_barrio) table th {
+    color: #0d47a1;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    padding: 16px;
+    border: none;
+    border-bottom: 1px solid #dbe5f0;
+}
+
+.pagina-contenido:has(#siga_barrio) table td {
+    padding: 16px;
+    color: #475569;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.pagina-contenido:has(#siga_barrio) table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.pagina-contenido:has(#siga_barrio) table tbody tr:hover {
+    background: #f0f9ff;
+}
+
+/* ENLACES EDITAR Y ELIMINAR */
+
+.pagina-contenido:has(#siga_barrio) table a {
+    display: inline-block;
+    color: #0d47a1;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    background: #e8f0fe;
+    margin: 3px;
+    transition: background 0.2s ease;
+}
+
+.pagina-contenido:has(#siga_barrio) table a:hover {
+    background: #d1e3ff;
+}
+
+/* ADAPTACION A CELULARES */
+
+@media (max-width: 768px) {
+
+    .pagina-contenido:has(#siga_barrio) {
+        padding: 20px;
+    }
+
+    .pagina-contenido:has(#siga_barrio) form {
+        padding: 20px;
+    }
+
+    .pagina-contenido:has(#siga_barrio) {
+        overflow-x: auto;
+    }
+
+    .pagina-contenido:has(#siga_barrio) table {
+        min-width: 650px;
+    }
+
+    .pagina-contenido:has(#siga_barrio) h2 {
+        font-size: 22px;
+    }
+}
