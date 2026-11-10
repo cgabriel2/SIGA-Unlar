@@ -713,3 +713,24 @@ footer {
     background-color: #FFF3E0;
     color: #D97706;
 }
+
+/* ACCESO A VIVIENDAS */
+
+.panel-vecino .icono-viviendas {
+    background-color: #E8F0FE;
+    color: #0D47A1;
+}
+
+.panel-acceso-enlace {
+    display: inline-block;
+    color: #0D47A1;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+.panel-acceso-enlace:hover {
+    color: #00ACC1;
+    text-decoration: underline;
+}

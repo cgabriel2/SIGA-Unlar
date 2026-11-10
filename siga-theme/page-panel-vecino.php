@@ -137,6 +137,27 @@ get_header();
 
             <div class="panel-accesos-grid">
 
+<article class="panel-acceso">
+    <div class="panel-acceso-icono icono-viviendas">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="m3 10 9-7 9 7"/>
+            <path d="M5 9v12h14V9"/>
+            <path d="M9 21v-7h6v7"/>
+        </svg>
+    </div>
+
+    <h3>Mis viviendas</h3>
+    <p>Consultá y gestioná las viviendas asociadas a tu cuenta.</p>
+
+    <a class="panel-acceso-enlace"
+       href="<?php echo esc_url(home_url('/mis-viviendas/')); ?>">
+        Ir a mis viviendas →
+    </a>
+</article>
+
                 <article class="panel-acceso">
                     <div class="panel-acceso-icono icono-agua">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
