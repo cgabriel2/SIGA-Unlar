@@ -697,3 +697,4 @@ add_shortcode(
     'siga_avisos_mi_barrio',
     'siga_mostrar_avisos_mi_barrio'
 );
+            
