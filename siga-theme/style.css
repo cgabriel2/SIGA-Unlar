@@ -754,201 +754,282 @@ footer {
     text-decoration: underline;
 }
 
-/* =========================================
-   SIGA - DISEÑO DEL MODULO MIS VIVIENDAS
-   PC4 - ESTILOS SIN MODIFICAR EL PHP DE PC1
-========================================= */
 
-.pagina-contenido:has(#siga_barrio) {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.06);
-    color: #334155;
+/* ==============================================================
+   SIGA PC4 - ESTILO UNIFICADO DE PAGINAS Y MODULOS
+   Solo presentacion: no cambia PHP, formularios ni base de datos.
+   Incluye viviendas, reclamos, seguimiento, cortes y paginas base.
+   ============================================================== */
+
+/* Encabezados y texto de las paginas interiores */
+.pagina-siga .pagina-contenedor > h1 {
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
 }
 
-/* TITULOS */
+.pagina-siga .pagina-contenido {
+    color: #334155;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
 
-.pagina-contenido:has(#siga_barrio) h2 {
+.pagina-siga .pagina-contenido h2 {
     color: #12345a;
     font-size: 25px;
-    font-weight: 700;
-    margin-top: 32px;
-    margin-bottom: 22px;
+    line-height: 1.3;
+    margin: 24px 0 18px;
 }
 
-/* FORMULARIO */
+.pagina-siga .pagina-contenido h2:first-child { margin-top: 0; }
 
-.pagina-contenido:has(#siga_barrio) form {
+.pagina-siga .pagina-contenido h3 {
+    color: #12345a;
+    font-size: 19px;
+    margin: 22px 0 12px;
+}
+
+.pagina-siga .pagina-contenido p {
+    line-height: 1.7;
+}
+
+/* Formularios de viviendas, reclamos y futuras secciones SIGA */
+.pagina-siga .pagina-contenido form {
     background: #f8fbff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
     padding: 28px;
-    margin-bottom: 35px;
+    margin: 20px 0 32px;
 }
 
-.pagina-contenido:has(#siga_barrio) form p {
-    margin-bottom: 22px;
-}
+.pagina-siga .pagina-contenido form p { margin: 0 0 20px; }
+.pagina-siga .pagina-contenido form p:last-child { margin-bottom: 0; }
 
-/* ETIQUETAS */
-
-.pagina-contenido:has(#siga_barrio) label {
+.pagina-siga .pagina-contenido form label {
     display: inline-block;
-    font-weight: 600;
+    margin-bottom: 8px;
     font-size: 15px;
+    font-weight: 600;
     color: #334155;
-    margin-bottom: 9px;
 }
 
-/* CAMPOS DEL FORMULARIO */
-
-.pagina-contenido:has(#siga_barrio) select,
-.pagina-contenido:has(#siga_barrio) input[type="text"] {
+.pagina-siga .pagina-contenido form select,
+.pagina-siga .pagina-contenido form input[type="text"],
+.pagina-siga .pagina-contenido form textarea,
+.pagina-siga .pagina-contenido form input[type="number"],
+.pagina-siga .pagina-contenido form input[type="date"] {
     display: block;
-    width: 100%;
-    max-width: 520px;
     box-sizing: border-box;
-    padding: 14px 16px;
-    font-family: inherit;
-    font-size: 15px;
-    color: #334155;
-    background: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    min-height: 46px;
+    padding: 12px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 10px;
+    background: #ffffff;
+    color: #1f2937;
+    font: inherit;
+    font-size: 15px;
     outline: none;
-    transition: border-color 0.2s ease,
-                box-shadow 0.2s ease;
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
-.pagina-contenido:has(#siga_barrio) select:focus,
-.pagina-contenido:has(#siga_barrio) input[type="text"]:focus {
+.pagina-siga .pagina-contenido form textarea {
+    min-height: 135px;
+    resize: vertical;
+}
+
+.pagina-siga .pagina-contenido form select:focus,
+.pagina-siga .pagina-contenido form input[type="text"]:focus,
+.pagina-siga .pagina-contenido form input[type="number"]:focus,
+.pagina-siga .pagina-contenido form input[type="date"]:focus,
+.pagina-siga .pagina-contenido form textarea:focus {
     border-color: #00acc1;
-    box-shadow: 0 0 0 3px rgba(0, 172, 193, 0.12);
+    box-shadow: 0 0 0 3px rgba(0, 172, 193, .12);
 }
 
-/* BOTON PRINCIPAL */
-
-.pagina-contenido:has(#siga_barrio) button[type="submit"] {
+.pagina-siga .pagina-contenido form button[type="submit"],
+.pagina-siga .pagina-contenido form input[type="submit"] {
+    display: inline-block;
+    padding: 13px 23px;
+    border: 0;
+    border-radius: 10px;
     background: #0d47a1;
     color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 24px;
-    font-family: inherit;
+    font: inherit;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 1.4;
     cursor: pointer;
-    transition: background 0.2s ease,
-                transform 0.2s ease;
+    transition: background .2s ease, transform .2s ease;
 }
 
-.pagina-contenido:has(#siga_barrio) button[type="submit"]:hover {
+.pagina-siga .pagina-contenido form button[type="submit"]:hover,
+.pagina-siga .pagina-contenido form input[type="submit"]:hover {
     background: #083579;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
-.pagina-contenido:has(#siga_barrio) button[type="submit"]:focus-visible {
+.pagina-siga .pagina-contenido form button[type="submit"]:focus-visible,
+.pagina-siga .pagina-contenido a:focus-visible {
     outline: 3px solid #00acc1;
     outline-offset: 3px;
 }
 
-/* ENLACES DEL FORMULARIO */
-
-.pagina-contenido:has(#siga_barrio) form a {
+.pagina-siga .pagina-contenido form a {
+    display: inline-block;
+    margin-left: 12px;
     color: #0d47a1;
     font-weight: 600;
     text-decoration: none;
-    margin-left: 12px;
 }
 
-.pagina-contenido:has(#siga_barrio) form a:hover {
-    text-decoration: underline;
-}
+.pagina-siga .pagina-contenido form a:hover { text-decoration: underline; }
 
-/* TABLA DE VIVIENDAS */
-
-.pagina-contenido:has(#siga_barrio) table {
-    width: 100%;
-    border: none;
+/* Tablas: viviendas, mis reclamos y otros listados de modulos */
+.pagina-siga .pagina-contenido table {
+    width: 100% !important;
+    border: none !important;
     border-collapse: separate !important;
     border-spacing: 0;
+    margin: 18px 0 24px;
     border-radius: 12px;
-    overflow: hidden;
-    margin-top: 20px;
+    box-shadow: 0 0 0 1px #e2e8f0;
     font-size: 14px;
 }
 
-.pagina-contenido:has(#siga_barrio) table thead {
+.pagina-siga .pagina-contenido table thead {
     background: #e8f0fe;
 }
 
-.pagina-contenido:has(#siga_barrio) table th {
-    color: #0d47a1;
-    font-size: 14px;
-    font-weight: 700;
+.pagina-siga .pagina-contenido table th,
+.pagina-siga .pagina-contenido table td {
+    border: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 15px 14px;
     text-align: left;
-    padding: 16px;
-    border: none;
-    border-bottom: 1px solid #dbe5f0;
-}
-
-.pagina-contenido:has(#siga_barrio) table td {
-    padding: 16px;
-    color: #475569;
-    border: none;
-    border-bottom: 1px solid #e2e8f0;
     vertical-align: middle;
+    overflow-wrap: anywhere;
 }
 
-.pagina-contenido:has(#siga_barrio) table tbody tr:nth-child(even) {
-    background: #f8fafc;
-}
-
-.pagina-contenido:has(#siga_barrio) table tbody tr:hover {
-    background: #f0f9ff;
-}
-
-/* ENLACES EDITAR Y ELIMINAR */
-
-.pagina-contenido:has(#siga_barrio) table a {
-    display: inline-block;
+.pagina-siga .pagina-contenido table th {
     color: #0d47a1;
-    font-weight: 600;
-    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pagina-siga .pagina-contenido table tr:last-child td { border-bottom: none !important; }
+.pagina-siga .pagina-contenido table tbody tr:nth-child(even) { background: #f8fafc; }
+.pagina-siga .pagina-contenido table tbody tr:hover { background: #f0f9ff; }
+
+.pagina-siga .pagina-contenido table a {
+    display: inline-block;
     padding: 7px 10px;
+    margin: 2px 3px 2px 0;
     border-radius: 7px;
     background: #e8f0fe;
-    margin: 3px;
-    transition: background 0.2s ease;
+    color: #0d47a1;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
-.pagina-contenido:has(#siga_barrio) table a:hover {
-    background: #d1e3ff;
+.pagina-siga .pagina-contenido table a:hover { background: #d1e3ff; }
+
+/* Viviendas: el formulario de PC1 usa el identificador #siga_barrio */
+.pagina-siga .pagina-contenido:has(#siga_barrio) form {
+    max-width: none;
 }
 
-/* ADAPTACION A CELULARES */
+/* Nuevo reclamo: ampliar los selectores y la descripcion */
+.pagina-siga .pagina-contenido:has(#vivienda_id) form label {
+    display: block;
+}
 
+.pagina-siga .pagina-contenido:has(#vivienda_id) form textarea {
+    width: 100%;
+}
+
+/* Historial de reclamos del PC2 */
+.pagina-siga .pagina-contenido .siga-historial {
+    background: #f8fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.pagina-siga .pagina-contenido .siga-historial > h2 { margin-top: 0; }
+
+.pagina-siga .pagina-contenido .siga-historial ol {
+    list-style: none;
+    margin: 24px 0 0 8px;
+    padding: 0 0 0 26px;
+    border-left: 2px solid #bfdbfe;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li {
+    position: relative;
+    padding: 3px 0 20px 14px;
+    margin: 0;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    background: #0d47a1;
+    box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li strong { color: #0d47a1; }
+.pagina-siga .pagina-contenido .siga-historial ol > li p { margin: 5px 0 0; }
+
+/* Respuestas informativas y avisos en paginas internas */
+.pagina-siga .pagina-contenido p[role="status"] {
+    padding: 12px 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    background: #f0fdf4;
+    font-weight: 600;
+}
+
+/* Respetar las clases del CSS de PC2 sin modificar sus archivos */
+.pagina-siga .pagina-contenido .siga-pc2 {
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Ajustes para tablet y celular */
 @media (max-width: 768px) {
+    .pagina-siga { padding: 40px 16px; }
+    .pagina-siga .pagina-contenido { padding: 20px; }
+    .pagina-siga .pagina-contenido form { padding: 18px; }
+    .pagina-siga .pagina-contenido .siga-historial { padding: 18px; }
 
-    .pagina-contenido:has(#siga_barrio) {
-        padding: 20px;
-    }
-
-    .pagina-contenido:has(#siga_barrio) form {
-        padding: 20px;
-    }
-
-    .pagina-contenido:has(#siga_barrio) {
+    .pagina-siga .pagina-contenido table {
+        display: block;
         overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
     }
 
-    .pagina-contenido:has(#siga_barrio) table {
-        min-width: 650px;
+    .pagina-siga .pagina-contenido table td {
+        white-space: normal;
+        min-width: 85px;
     }
 
-    .pagina-contenido:has(#siga_barrio) h2 {
-        font-size: 22px;
-    }
+    .pagina-siga .pagina-contenedor > h1 { margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+    .pagina-siga .pagina-contenido form select,
+    .pagina-siga .pagina-contenido form input[type="text"],
+    .pagina-siga .pagina-contenido form textarea { max-width: 100%; }
 }
