@@ -127,3 +127,44 @@ function siga_procesar_registro_vecino() {
 }
 add_action('admin_post_nopriv_siga_registrar_vecino', 'siga_procesar_registro_vecino');
 add_action('admin_post_siga_registrar_vecino', 'siga_procesar_registro_vecino');
+
+// Cargamos el perfil y panel del vecino.
+require_once __DIR__ . '/perfil-panel.php';
+
+// Cargamos los estilos de PC1.
+add_action('wp_enqueue_scripts', function () {
+
+    if (!is_page([
+        'mis-viviendas',
+        'registro-de-vecino',
+        'mi-perfil',
+        'panel-vecino'
+    ])) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'siga-pc1-estilos',
+        plugin_dir_url(SIGA_PLUGIN_PATH . 'siga.php') .
+            'assets/css/siga-pc1.css',
+        [],
+        filemtime(
+            SIGA_PLUGIN_PATH . 'assets/css/siga-pc1.css'
+        )
+    );
+});
+
+// Identificamos las páginas de PC1.
+add_filter('body_class', function ($classes) {
+
+    if (is_page([
+        'mis-viviendas',
+        'registro-de-vecino',
+        'mi-perfil',
+        'panel-vecino'
+    ])) {
+        $classes[] = 'siga-pc1-page';
+    }
+
+    return $classes;
+});
