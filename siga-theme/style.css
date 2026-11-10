@@ -603,8 +603,21 @@ footer {
 
 .panel-accesos-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 20px;
+}
+
+/* Tres tarjetas arriba y dos centradas abajo */
+.panel-accesos-grid > .panel-acceso {
+    grid-column: span 2;
+}
+
+.panel-accesos-grid > .panel-acceso:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.panel-accesos-grid > .panel-acceso:nth-child(5) {
+    grid-column: 4 / span 2;
 }
 
 .panel-acceso {
@@ -654,6 +667,12 @@ footer {
 @media (max-width: 1000px) {
     .panel-accesos-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-accesos-grid > .panel-acceso,
+    .panel-accesos-grid > .panel-acceso:nth-child(4),
+    .panel-accesos-grid > .panel-acceso:nth-child(5) {
+        grid-column: auto;
     }
 }
 
