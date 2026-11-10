@@ -666,3 +666,50 @@ footer {
         padding: 20px;
     }
 }
+
+/* ICONOS SVG DEL PANEL SIGA */
+
+.panel-vecino .panel-icono,
+.panel-vecino .panel-acceso-icono {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    font-size: initial;
+}
+
+.panel-vecino .panel-icono svg,
+.panel-vecino .panel-acceso-icono svg {
+    width: 27px;
+    height: 27px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.panel-vecino .icono-agua {
+    background-color: #E0F7FA;
+    color: #00ACC1;
+}
+
+.panel-vecino .icono-reclamos {
+    background-color: #E8F0FE;
+    color: #0D47A1;
+}
+
+.panel-vecino .icono-facturas {
+    background-color: #EEF2FF;
+    color: #4F46E5;
+}
+
+.panel-vecino .icono-estado {
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.panel-vecino .icono-cortes {
+    background-color: #FFF3E0;
+    color: #D97706;
+}
