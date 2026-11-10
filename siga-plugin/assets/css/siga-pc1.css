@@ -1,0 +1,137 @@
+/* SIGA - Estilos de PC1. Afecta solo las paginas marcadas con siga-pc1-page. */
+body.siga-pc1-page {
+  --siga-primary: #1478a8;
+  --siga-primary-dark: #0b5477;
+  --siga-ink: #193447;
+  --siga-muted: #597486;
+  --siga-border: #d9e7ee;
+  --siga-bg: #f2f8fb;
+}
+
+/* Contenido del modulo: no cambia el encabezado ni el pie del tema. */
+body.siga-pc1-page .wp-block-post-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--siga-border);
+  border-radius: 18px;
+  padding: clamp(22px, 4vw, 44px);
+  box-shadow: 0 10px 32px rgba(19, 79, 112, .08);
+  color: var(--siga-ink);
+}
+body.siga-pc1-page .wp-block-post-title {
+  color: var(--siga-primary-dark);
+  font-weight: 750;
+  letter-spacing: -.025em;
+}
+body.siga-pc1-page .wp-block-post-content h2 {
+  color: var(--siga-primary-dark);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  margin: 1.7rem 0 .9rem;
+}
+body.siga-pc1-page .wp-block-post-content h2:first-child { margin-top: 0; }
+body.siga-pc1-page .wp-block-post-content h3 { color: var(--siga-ink); font-weight: 650; }
+body.siga-pc1-page .wp-block-post-content p { line-height: 1.65; }
+
+body.siga-pc1-page .wp-block-post-content form {
+  background: var(--siga-bg);
+  border: 1px solid var(--siga-border);
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 28px);
+  margin: 1rem 0 1.7rem;
+}
+body.siga-pc1-page .wp-block-post-content label {
+  display: inline-block;
+  color: var(--siga-ink);
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+body.siga-pc1-page .wp-block-post-content input:not([type="hidden"]):not([type="checkbox"]),
+body.siga-pc1-page .wp-block-post-content select,
+body.siga-pc1-page .wp-block-post-content textarea {
+  display: inline-block;
+  width: min(100%, 500px);
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #b8ccd8;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--siga-ink);
+  font: inherit;
+  margin: 2px 0 10px;
+}
+body.siga-pc1-page .wp-block-post-content input:focus-visible,
+body.siga-pc1-page .wp-block-post-content select:focus-visible,
+body.siga-pc1-page .wp-block-post-content textarea:focus-visible {
+  outline: 3px solid rgba(20, 120, 168, .22);
+  outline-offset: 1px;
+  border-color: var(--siga-primary);
+}
+body.siga-pc1-page .wp-block-post-content button,
+body.siga-pc1-page .wp-block-post-content input[type="submit"] {
+  background: var(--siga-primary);
+  color: #fff;
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 19px;
+  min-height: 44px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+body.siga-pc1-page .wp-block-post-content button:hover,
+body.siga-pc1-page .wp-block-post-content input[type="submit"]:hover {
+  background: var(--siga-primary-dark);
+  transform: translateY(-1px);
+}
+body.siga-pc1-page .wp-block-post-content a { color: var(--siga-primary-dark); text-underline-offset: 3px; }
+body.siga-pc1-page .wp-block-post-content a:hover { color: var(--siga-primary); }
+
+/* Tablas CRUD: aptas para pantallas pequenas. */
+body.siga-pc1-page .wp-block-post-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border: 1px solid var(--siga-border);
+  border-radius: 12px;
+  font-size: .94rem;
+  margin: 1rem 0 1.5rem;
+}
+body.siga-pc1-page .wp-block-post-content th,
+body.siga-pc1-page .wp-block-post-content td {
+  padding: 12px 14px;
+  text-align: left;
+  border: 1px solid var(--siga-border);
+  overflow-wrap: anywhere;
+  vertical-align: middle;
+}
+body.siga-pc1-page .wp-block-post-content th { background: #e7f3f8; color: var(--siga-primary-dark); font-weight: 700; }
+body.siga-pc1-page .wp-block-post-content tr:nth-child(even) td { background: #f7fbfd; }
+
+body.siga-pc1-page .siga-panel,
+body.siga-pc1-page .siga-perfil { width: 100%; }
+body.siga-pc1-page .siga-panel ul { padding-left: 1.3rem; }
+body.siga-pc1-page .siga-panel li { margin: .5rem 0; }
+
+@media (max-width: 600px) {
+  body.siga-pc1-page .wp-block-post-content { padding: 18px; border-radius: 12px; }
+  body.siga-pc1-page .wp-block-post-content th,
+  body.siga-pc1-page .wp-block-post-content td { padding: 9px; }
+}
+
+/* Evitamos que los encabezados se dividan en varias líneas */
+body.siga-pc1-page .wp-block-post-content th {
+    white-space: nowrap;
+}
+
+/* Mejoramos el ancho de la columna ID */
+body.siga-pc1-page .wp-block-post-content th:first-child,
+body.siga-pc1-page .wp-block-post-content td:first-child {
+    min-width: 55px;
+    text-align: center;
+}
