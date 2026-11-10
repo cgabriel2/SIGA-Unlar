@@ -578,3 +578,91 @@ footer {
     border: 1px solid #e2e8f0;
     box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
 }
+
+/* ACCESOS RAPIDOS DEL PANEL DEL VECINO */
+
+.panel-accesos {
+    margin-top: 35px;
+    margin-bottom: 40px;
+}
+
+.panel-accesos-encabezado {
+    margin-bottom: 24px;
+}
+
+.panel-accesos-encabezado h2 {
+    font-size: 26px;
+    color: #0D47A1;
+    margin-bottom: 8px;
+}
+
+.panel-accesos-encabezado p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+.panel-accesos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.panel-acceso {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-acceso:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(13, 71, 161, 0.10);
+}
+
+.panel-acceso-icono {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.panel-acceso h3 {
+    color: #0D47A1;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.panel-acceso p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.panel-acceso-pendiente {
+    display: inline-block;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* DISEÑO RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .panel-accesos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .panel-accesos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-acceso {
+        padding: 20px;
+    }
+}
