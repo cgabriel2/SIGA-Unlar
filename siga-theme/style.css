@@ -395,3 +395,186 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* PANEL DEL VECINO */
+
+.panel-vecino {
+    padding: 70px 30px;
+    background-color: #f4f9fc;
+    min-height: 500px;
+}
+
+.panel-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panel-encabezado {
+    margin-bottom: 35px;
+}
+
+.panel-encabezado h1 {
+    font-size: 38px;
+    color: #12345a;
+    margin-bottom: 10px;
+}
+
+.panel-encabezado p {
+    font-size: 18px;
+    color: #64748b;
+}
+
+.panel-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.panel-tarjeta {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}
+
+.panel-icono {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.panel-tarjeta h2 {
+    font-size: 17px;
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.panel-tarjeta strong {
+    display: block;
+    font-size: 30px;
+    color: #0d47a1;
+    margin-bottom: 10px;
+}
+
+.panel-tarjeta p {
+    font-size: 14px;
+    color: #64748b;
+}
+
+@media (max-width: 900px) {
+    .panel-tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .panel-tarjetas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* GRAFICO DE CONSUMO DEL VECINO */
+
+.panel-consumo-grafico {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}
+
+.grafico-encabezado h2 {
+    color: #12345a;
+    font-size: 24px;
+    margin: 0 0 8px;
+}
+
+.grafico-encabezado p {
+    color: #64748b;
+    font-size: 15px;
+    margin: 0;
+}
+
+.grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 20px;
+    height: 280px;
+    padding-top: 35px;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.grafico-mes {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.grafico-mes .barra {
+    width: 65%;
+    max-width: 75px;
+    background: linear-gradient(180deg, #38bdf8, #0d47a1);
+    border-radius: 8px 8px 0 0;
+    transition: 0.3s ease;
+}
+
+.grafico-mes .barra:hover {
+    background: #00acc1;
+}
+
+.grafico-mes span {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.grafico-nota {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 35px;
+}
+
+@media (max-width: 550px) {
+    .panel-consumo-grafico {
+        padding: 18px;
+    }
+
+    .grafico-barras {
+        gap: 8px;
+        height: 220px;
+    }
+
+    .grafico-mes .barra {
+        width: 85%;
+    }
+}
+/* PAGINAS GENERALES DE SIGA */
+
+.pagina-siga {
+    background-color: #f4f9fc;
+    padding: 60px 30px;
+    min-height: 500px;
+}
+
+.pagina-contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pagina-contenedor h1 {
+    color: #12345a;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.pagina-contenido {
+    background-color: white;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}

@@ -1,3 +1,4 @@
+
 <?php
 
 function siga_cargar_estilos() {
@@ -5,7 +6,7 @@ function siga_cargar_estilos() {
         'siga-estilos',
         get_stylesheet_uri(),
         array(),
-        '1.0'
+        filemtime(get_stylesheet_directory() . '/style.css')
     );
 }
 
