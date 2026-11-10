@@ -1,0 +1,311 @@
+
+/* SIGA - Diseño de Reclamos y Suministro */
+
+.siga-pc2 {
+    max-width: 1000px;
+    margin: 30px auto;
+    font-family: inherit;
+    color: #17324d;
+}
+
+.siga-pc2 h2 {
+    color: #125a86;
+    font-size: 28px;
+    margin-bottom: 22px;
+}
+
+.siga-pc2 h3 {
+    color: #174c70;
+    margin-bottom: 12px;
+}
+
+/* Formularios */
+.siga-pc2 form {
+    background: #ffffff;
+    border: 1px solid #dce7ee;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0, 45, 80, 0.06);
+}
+
+.siga-pc2 input,
+.siga-pc2 select,
+.siga-pc2 textarea {
+    border: 1px solid #cbdce7;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 100%;
+}
+
+.siga-pc2 button,
+.siga-pc2 input[type="submit"] {
+    background: #0876ad;
+    color: #ffffff;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.siga-pc2 button:hover,
+.siga-pc2 input[type="submit"]:hover {
+    background: #055680;
+}
+
+/* Tablas */
+.siga-pc2 table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 45, 80, 0.05);
+}
+
+.siga-pc2 th {
+    background: #12658d;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+.siga-pc2 td {
+    padding: 13px;
+    border-bottom: 1px solid #e5edf2;
+}
+
+.siga-pc2 tr:hover td {
+    background: #f2f9fc;
+}
+
+/* Tarjetas de suministro */
+.siga-pc2 article {
+    background: #ffffff;
+    border: 1px solid #d8e6ee !important;
+    border-left: 5px solid #0876ad !important;
+    border-radius: 12px !important;
+    padding: 22px !important;
+    margin-bottom: 18px !important;
+    box-shadow: 0 5px 16px rgba(0, 45, 80, 0.05);
+}
+
+/* Adaptación a celulares */
+@media (max-width: 700px) {
+    .siga-pc2 {
+        margin: 15px auto;
+    }
+
+    .siga-pc2 form {
+        padding: 16px;
+    }
+
+    .siga-pc2 table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* ===== SIGA PC2 - Mejoras visuales ===== */
+
+/* Dar más espacio a las páginas del módulo */
+.siga-pc2 {
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Formularios más ordenados */
+.siga-pc2 form {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Etiquetas y campos */
+.siga-pc2 label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #174c70;
+}
+
+.siga-pc2 select,
+.siga-pc2 textarea,
+.siga-pc2 input:not([type="hidden"]):not([type="submit"]) {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.siga-pc2 textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Botones */
+.siga-pc2 button,
+.siga-pc2 input[type="submit"] {
+    transition: background 0.2s ease;
+}
+
+/* Tablas */
+.siga-pc2 table {
+    width: 100%;
+    font-size: 15px;
+}
+
+.siga-pc2 th,
+.siga-pc2 td {
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+/* Enlaces de acciones */
+.siga-pc2 td a {
+    display: inline-block;
+    color: #0876ad;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.siga-pc2 td a:hover {
+    text-decoration: underline;
+}
+
+/* Avisos de suministro */
+.siga-pc2 article {
+    line-height: 1.65;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 700px) {
+    .siga-pc2 {
+        max-width: 100%;
+    }
+
+    .siga-pc2 th,
+    .siga-pc2 td {
+        padding: 10px;
+    }
+}
+
+/* ===== SIGA - Mejoras de tabla de reclamos ===== */
+
+/* Tabla de reclamos */
+.siga-pc2 table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+/* Evitar columnas demasiado apretadas */
+.siga-pc2 th,
+.siga-pc2 td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+/* Evitar cortes innecesarios en encabezados */
+.siga-pc2 th {
+    white-space: nowrap;
+}
+
+/* La descripción puede ocupar más espacio */
+.siga-pc2 td:nth-child(3) {
+    min-width: 200px;
+    overflow-wrap: anywhere;
+}
+
+/* Acciones más legibles */
+.siga-pc2 td:last-child {
+    min-width: 120px;
+}
+
+
+/* SIGA - Tabla de reclamos corregida */
+
+.siga-pc2:has(table) {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    position: static;
+    left: auto;
+    transform: none;
+    overflow-x: auto;
+}
+
+.siga-pc2 table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.siga-pc2 th,
+.siga-pc2 td {
+    padding: 12px;
+    font-size: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.siga-pc2 th {
+    white-space: nowrap;
+}
+
+.siga-pc2 td:last-child a {
+    white-space: nowrap;
+}
+/* Ocultar el título interno duplicado */
+.siga-pc2:has(table) h2 {
+    display: none;
+}
+
+
+/* ===== SIGA - Historial de reclamos ===== */
+
+.siga-pc2 ol {
+    list-style: none;
+    counter-reset: movimiento;
+    padding-left: 20px;
+    margin-top: 20px;
+    border-left: 3px solid #c9e3f2;
+}
+
+.siga-pc2 ol > li {
+    counter-increment: movimiento;
+    position: relative;
+    margin: 0 0 22px 0;
+    padding: 16px 20px;
+    background: #f5faff;
+    border: 1px solid #dceaf3;
+    border-radius: 10px;
+}
+
+.siga-pc2 ol > li::before {
+    content: counter(movimiento);
+    position: absolute;
+    left: -34px;
+    top: 16px;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    background: #0876ad;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.siga-pc2 ol > li p {
+    margin: 8px 0;
+}
+
+.siga-pc2 ol > li:last-child {
+    margin-bottom: 0;
+}
+

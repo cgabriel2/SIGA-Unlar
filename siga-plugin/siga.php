@@ -28,3 +28,15 @@ function siga_admin_panel() {
     }
     echo '</tbody></table><p><strong>Siguiente paso:</strong> programar los módulos en sus carpetas respectivas.</p></div>';
 }
+
+// Cargar estilos de Reclamos y Suministro.
+function siga_pc2_cargar_estilos() {
+    wp_enqueue_style(
+        'siga-pc2-estilos',
+        plugin_dir_url(__FILE__) . 'assets/css/siga-pc2.css',
+        [],
+        '1.0.0'
+    );
+}
+
+add_action('wp_enqueue_scripts', 'siga_pc2_cargar_estilos');
