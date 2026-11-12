@@ -99,5 +99,66 @@ def consultar_reclamos() -> dict:
     }
 
 
+# Datos ficticios de medidores y consumos
+# Más adelante serán obtenidos desde WordPress
+
+consumos = {
+    1: {
+        "barrio": "Centro",
+        "periodo": "2026-10",
+        "lectura_anterior": 120,
+        "lectura_actual": 135
+    },
+    2: {
+        "barrio": "San Vicente",
+        "periodo": "2026-10",
+        "lectura_anterior": 250,
+        "lectura_actual": 268
+    },
+    3: {
+        "barrio": "Facundo Quiroga",
+        "periodo": "2026-10",
+        "lectura_anterior": 310,
+        "lectura_actual": 322
+    }
+}
+
+
+@mcp.tool()
+def consultar_consumo(vivienda_id: int) -> dict:
+    """
+    Consulta el consumo de agua de una vivienda ficticia.
+
+    Recibe el ID de una vivienda y devuelve
+    sus lecturas y el consumo calculado en m3.
+    """
+
+    # Comprobar si la vivienda existe
+    if vivienda_id not in consumos:
+        return {
+            "error": "Vivienda no encontrada",
+            "vivienda_id": vivienda_id
+        }
+
+    # Obtener los datos de la vivienda
+    vivienda = consumos[vivienda_id]
+
+    lectura_anterior = vivienda["lectura_anterior"]
+    lectura_actual = vivienda["lectura_actual"]
+
+    # Calcular el consumo
+    consumo_total = lectura_actual - lectura_anterior
+
+    # Devolver la información
+    return {
+        "origen": "datos_ficticios",
+        "vivienda_id": vivienda_id,
+        "barrio": vivienda["barrio"],
+        "periodo": vivienda["periodo"],
+        "lectura_anterior_m3": lectura_anterior,
+        "lectura_actual_m3": lectura_actual,
+        "consumo_m3": consumo_total
+    }
+
 if __name__ == "__main__":
     mcp.run()
