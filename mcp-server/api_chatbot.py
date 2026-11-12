@@ -1,7 +1,10 @@
-
 # SIGA - API HTTP de IA
 # PC5 - Inteligencia Artificial y MCP
 
+import os
+import hmac
+
+from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 
 # Importar nuestros módulos existentes
@@ -11,6 +14,43 @@ from chatbot_ia import responder_con_ia
 from clasificador_ia import clasificar_con_ia
 
 app = Flask(__name__)
+
+# SIGA - Protección de endpoints con OpenAI
+
+load_dotenv()
+
+TOKEN_INTERNO = os.getenv("SIGA_INTERNAL_TOKEN")
+
+if not TOKEN_INTERNO:
+    raise RuntimeError(
+        "Falta SIGA_INTERNAL_TOKEN en el archivo .env"
+    )
+
+
+@app.before_request
+def verificar_acceso_ia():
+    # Proteger solamente las rutas que consumen OpenAI
+    rutas_protegidas = (
+        "/api/chatbot-ia",
+        "/api/clasificar-ia"
+    )
+
+    if request.path not in rutas_protegidas:
+        return None
+
+    token_recibido = request.headers.get(
+        "X-SIGA-Token", ""
+    )
+
+    if not hmac.compare_digest(
+        token_recibido,
+        TOKEN_INTERNO
+    ):
+        return jsonify({
+            "error": "Acceso no autorizado"
+        }), 401
+
+    return None
 
 
 # Endpoint del chatbot
