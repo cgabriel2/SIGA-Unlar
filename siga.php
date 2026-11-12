@@ -28,3 +28,7 @@ function siga_admin_panel() {
     }
     echo '</tbody></table><p><strong>Siguiente paso:</strong> programar los módulos en sus carpetas respectivas.</p></div>';
 }
+require_once plugin_dir_path( __FILE__ ) . 'modules/consumos/consumos.php';
+require_once plugin_dir_path( __FILE__ ) . 'modules/consumos/estadisticas.php';
+require_once plugin_dir_path( __FILE__ ) . 'modules/consumos/facturas.php';
+require_once plugin_dir_path( __FILE__ ) . 'modules/consumos/medidores.php';
