@@ -365,3 +365,201 @@ function siga_pagina_chatbot_ia() {
     </script>
     <?php
 }
+
+/**
+ * SIGA - Endpoint para clasificar reclamos con OpenAI.
+ * Acceso exclusivo para administradores.
+ */
+add_action('rest_api_init', function () {
+    register_rest_route('siga/v1', '/clasificar-ia', [
+        'methods' => 'POST',
+        'callback' => 'siga_clasificar_reclamo_ia',
+        'permission_callback' => function () {
+            return current_user_can('manage_options');
+        }
+    ]);
+});
+
+function siga_clasificar_reclamo_ia(WP_REST_Request $request) {
+
+    $descripcion = $request->get_param('descripcion');
+
+    if (!is_string($descripcion) || trim($descripcion) === '') {
+        return new WP_Error(
+            'descripcion_invalida',
+            'Debes escribir una descripción del reclamo.',
+            ['status' => 400]
+        );
+    }
+
+    if (mb_strlen($descripcion) > 2000) {
+        return new WP_Error(
+            'descripcion_larga',
+            'La descripción no puede superar los 2000 caracteres.',
+            ['status' => 400]
+        );
+    }
+
+    if (!defined('SIGA_INTERNAL_TOKEN') ||
+        SIGA_INTERNAL_TOKEN === '') {
+        return new WP_Error(
+            'configuracion_incompleta',
+            'Falta configurar el acceso al servicio de IA.',
+            ['status' => 500]
+        );
+    }
+
+    $respuesta = wp_remote_post(
+        'http://127.0.0.1:5000/api/clasificar-ia',
+        [
+            'timeout' => 40,
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'X-SIGA-Token' => SIGA_INTERNAL_TOKEN
+            ],
+            'body' => wp_json_encode([
+                'descripcion' => $descripcion
+            ])
+        ]
+    );
+
+    if (is_wp_error($respuesta)) {
+        return new WP_Error(
+            'clasificador_no_disponible',
+            'El servicio de clasificación no está disponible.',
+            ['status' => 502]
+        );
+    }
+
+    $codigo = wp_remote_retrieve_response_code($respuesta);
+    $datos = json_decode(
+        wp_remote_retrieve_body($respuesta),
+        true
+    );
+
+    if ($codigo !== 200 || !is_array($datos)) {
+        return new WP_Error(
+            'clasificacion_invalida',
+            'No se pudo obtener una clasificación válida.',
+            ['status' => 502]
+        );
+    }
+
+    return rest_ensure_response($datos);
+}
+
+/**
+ * SIGA - Página administrativa para probar el clasificador IA.
+ */
+add_action('admin_menu', function () {
+    add_management_page(
+        'Clasificador IA SIGA',
+        'Clasificador IA SIGA',
+        'manage_options',
+        'siga-clasificador-ia',
+        'siga_pagina_clasificador_ia'
+    );
+});
+
+function siga_pagina_clasificador_ia() {
+
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    $rest_url = rest_url('siga/v1/clasificar-ia');
+    $nonce = wp_create_nonce('wp_rest');
+    ?>
+    <div class="wrap">
+        <h1>Clasificador Inteligente de Reclamos</h1>
+
+        <p>
+            Escribí una descripción para que la IA sugiera
+            una categoría y una prioridad.
+        </p>
+
+        <textarea
+            id="siga-descripcion-ia"
+            rows="5"
+            maxlength="2000"
+            style="width: 550px; max-width: 100%;"
+        >Se rompió una cañería en la calle y está saliendo mucha agua.</textarea>
+
+        <p>
+            <button
+                type="button"
+                class="button button-primary"
+                id="siga-clasificar-ia"
+            >
+                Analizar con IA
+            </button>
+        </p>
+
+        <div id="siga-resultado-clasificador"
+             style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+    document.getElementById('siga-clasificar-ia').addEventListener(
+        'click',
+        async function () {
+
+            const boton = this;
+            const resultado = document.getElementById(
+                'siga-resultado-clasificador'
+            );
+
+            const descripcion = document.getElementById(
+                'siga-descripcion-ia'
+            ).value.trim();
+
+            if (!descripcion) {
+                resultado.textContent =
+                    'Primero escribí una descripción.';
+                return;
+            }
+
+            boton.disabled = true;
+            resultado.textContent = 'Analizando reclamo...';
+
+            try {
+                const respuesta = await fetch(
+                    <?php echo wp_json_encode($rest_url); ?>,
+                    {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-WP-Nonce':
+                                <?php echo wp_json_encode($nonce); ?>
+                        },
+                        body: JSON.stringify({
+                            descripcion: descripcion
+                        })
+                    }
+                );
+
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    resultado.textContent =
+                        'Error: ' +
+                        (datos.message || 'No se pudo clasificar.');
+                    return;
+                }
+
+                resultado.textContent =
+                    JSON.stringify(datos, null, 2);
+
+            } catch (error) {
+                resultado.textContent =
+                    'Error de conexión: ' + error.message;
+
+            } finally {
+                boton.disabled = false;
+            }
+        }
+    );
+    </script>
+    <?php
+}
