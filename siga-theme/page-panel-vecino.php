@@ -163,7 +163,20 @@ get_header();
                     </div>
                     <h3>Mis consumos</h3>
                     <p>Consultá tu historial de consumo de agua.</p>
-                    <span class="panel-acceso-pendiente">Próximamente</span>
+                    <?php $pagina_consumos = get_page_by_path('mis-consumos'); ?>
+
+<?php if (
+    $pagina_consumos &&
+    $pagina_consumos->post_status === 'publish' &&
+    shortcode_exists('siga_consumos')
+) : ?>
+    <a class="panel-acceso-enlace"
+       href="<?php echo esc_url(get_permalink($pagina_consumos->ID)); ?>">
+        Ver mis consumos →
+    </a>
+<?php else : ?>
+    <span class="panel-acceso-pendiente">Próximamente</span>
+<?php endif; ?>
                 </article>
 
                 <article class="panel-acceso">
@@ -207,7 +220,20 @@ get_header();
                     </div>
                     <h3>Mis facturas</h3>
                     <p>Consultá tus facturas y pagos.</p>
-                    <span class="panel-acceso-pendiente">Próximamente</span>
+                    <?php $pagina_facturas = get_page_by_path('mis-facturas'); ?>
+
+<?php if (
+    $pagina_facturas &&
+    $pagina_facturas->post_status === 'publish' &&
+    shortcode_exists('siga_facturas')
+) : ?>
+    <a class="panel-acceso-enlace"
+       href="<?php echo esc_url(get_permalink($pagina_facturas->ID)); ?>">
+        Ver mis facturas →
+    </a>
+<?php else : ?>
+    <span class="panel-acceso-pendiente">Próximamente</span>
+<?php endif; ?>
                 </article>
 
                 <article class="panel-acceso">
