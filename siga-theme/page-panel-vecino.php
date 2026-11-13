@@ -222,7 +222,20 @@ get_header();
                     </div>
                     <h3>Cortes de agua</h3>
                     <p>Consultá los avisos de cortes de suministro.</p>
-                    <span class="panel-acceso-pendiente">Próximamente</span>
+                   <?php $pagina_cortes = get_page_by_path('cortes-de-agua'); ?>
+
+<?php if (
+    $pagina_cortes &&
+    $pagina_cortes->post_status === 'publish' &&
+    shortcode_exists('siga_avisos_suministro')
+) : ?>
+    <a class="panel-acceso-enlace"
+       href="<?php echo esc_url(get_permalink($pagina_cortes->ID)); ?>">
+        Ver avisos de suministro →
+    </a>
+<?php else : ?>
+    <span class="panel-acceso-pendiente">Próximamente</span>
+<?php endif; ?>
                 </article>
 
             </div>
