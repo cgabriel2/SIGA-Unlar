@@ -1,0 +1,1035 @@
+/*
+Theme Name: SIGA Theme
+Author: Grupo SIGA - UNLaR
+Description: Tema personalizado para el Sistema Inteligente de Gestión del Agua.
+Version: 1.0
+Text Domain: siga-theme
+*/
+
+:root {
+    --color-principal: #0D47A1;
+    --color-secundario: #00ACC1;
+    --color-fondo: #F4F9FC;
+    --color-texto: #1F2937;
+    --color-blanco: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+header {
+    background-color: var(--color-principal);
+    color: var(--color-blanco);
+    padding: 20px 40px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+main {
+    padding: 40px;
+}
+
+footer {
+    background-color: var(--color-principal);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 20px;
+}
+.site-header {
+     background-color: var(--color-principal);
+    color: var(--color-principal);
+    padding: 20px 30px;
+    border-bottom: none;
+}
+
+.header-container {
+      max-width: 1200px;
+    margin: 0 auto;
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    background-color: var(--color-blanco);
+    border-radius: 18px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.logo h1 {
+    font-size: 30px;
+    margin: 0;
+    color: var(--color-principal);
+}
+
+.logo p {
+    font-size: 12px;
+    margin: 0;
+    color: #64748b;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: var(--color-principal);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.main-nav a:hover {
+    color: var(--color-secundario);
+}
+
+.btn-acceder {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-acceder:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .header-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+/* HERO - PORTADA PRINCIPAL */
+
+.hero {
+    background: linear-gradient(120deg, #eaf8ff, #d1f0fa);
+    padding: 100px 40px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-contenedor {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero-texto {
+    max-width: 650px;
+}
+
+.hero-texto h1 {
+    font-size: 56px;
+    line-height: 1.15;
+    color: #12345a;
+    margin: 0 0 25px;
+}
+
+.hero-texto h1 span {
+    color: #00acc1;
+}
+
+.hero-texto p {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 30px;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.boton-principal,
+.boton-secundario {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.boton-principal {
+    background-color: #0d47a1;
+    color: white;
+}
+
+.boton-principal:hover {
+    background-color: #083579;
+    color: white;
+}
+
+.boton-secundario {
+    background-color: white;
+    color: #0d47a1;
+    border: 2px solid #0d47a1;
+}
+
+.boton-secundario:hover {
+    background-color: #e3f2fd;
+}
+
+/* Adaptacion a celulares */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 20px;
+        min-height: auto;
+    }
+
+    .hero-texto h1 {
+        font-size: 36px;
+    }
+
+    .hero-texto p {
+        font-size: 17px;
+    }
+}
+
+/* DASHBOARD DEL HERO */
+
+.hero-dashboard {
+    background-color: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 15px 35px rgba(13, 71, 161, 0.12);
+    border: 1px solid #e2edf5;
+    min-width: 0;
+}
+
+.dashboard-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #0d47a1;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.dashboard-consumo {
+    background-color: #f1f9ff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-consumo p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.dashboard-consumo h3 {
+    font-size: 36px;
+    color: #12345a;
+    margin: 8px 0;
+}
+
+.dashboard-consumo small {
+    color: #64748b;
+}
+
+.dashboard-grafico {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 140px;
+    margin-bottom: 20px;
+}
+
+.dashboard-grafico span {
+    flex: 1;
+    background: linear-gradient(180deg, #38bdf8, #0d47a1);
+    border-radius: 8px 8px 0 0;
+}
+
+.dashboard-estados {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.dashboard-estados div {
+    background-color: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.dashboard-estados p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 8px;
+}
+
+.dashboard-estados strong {
+    color: #0d47a1;
+    font-size: 18px;
+}
+@media (max-width: 900px) {
+    .hero-contenedor {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero-dashboard {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-dashboard {
+        padding: 18px;
+    }
+
+    .dashboard-grafico {
+        gap: 7px;
+    }
+
+    .dashboard-estados {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* SECCION DE SERVICIOS */
+
+.servicios {
+    padding: 70px 30px;
+    background-color: #f4f9fc;
+}
+
+.servicios-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.servicios h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #12345a;
+    margin-bottom: 40px;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.servicio-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.servicio-card:hover {
+    transform: translateY(-5px);
+}
+
+.servicio-icono {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.servicio-card h3 {
+    color: #0d47a1;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.servicio-card p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .servicios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* PANEL DEL VECINO */
+
+.panel-vecino {
+    padding: 70px 30px;
+    background-color: #f4f9fc;
+    min-height: 500px;
+}
+
+.panel-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panel-encabezado {
+    margin-bottom: 35px;
+}
+
+.panel-encabezado h1 {
+    font-size: 38px;
+    color: #12345a;
+    margin-bottom: 10px;
+}
+
+.panel-encabezado p {
+    font-size: 18px;
+    color: #64748b;
+}
+
+.panel-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.panel-tarjeta {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}
+
+.panel-icono {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.panel-tarjeta h2 {
+    font-size: 17px;
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.panel-tarjeta strong {
+    display: block;
+    font-size: 30px;
+    color: #0d47a1;
+    margin-bottom: 10px;
+}
+
+.panel-tarjeta p {
+    font-size: 14px;
+    color: #64748b;
+}
+
+@media (max-width: 900px) {
+    .panel-tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .panel-tarjetas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* GRAFICO DE CONSUMO DEL VECINO */
+
+.panel-consumo-grafico {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}
+
+.grafico-encabezado h2 {
+    color: #12345a;
+    font-size: 24px;
+    margin: 0 0 8px;
+}
+
+.grafico-encabezado p {
+    color: #64748b;
+    font-size: 15px;
+    margin: 0;
+}
+
+.grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 20px;
+    height: 280px;
+    padding-top: 35px;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.grafico-mes {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.grafico-mes .barra {
+    width: 65%;
+    max-width: 75px;
+    background: linear-gradient(180deg, #38bdf8, #0d47a1);
+    border-radius: 8px 8px 0 0;
+    transition: 0.3s ease;
+}
+
+.grafico-mes .barra:hover {
+    background: #00acc1;
+}
+
+.grafico-mes span {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.grafico-nota {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 35px;
+}
+
+@media (max-width: 550px) {
+    .panel-consumo-grafico {
+        padding: 18px;
+    }
+
+    .grafico-barras {
+        gap: 8px;
+        height: 220px;
+    }
+
+    .grafico-mes .barra {
+        width: 85%;
+    }
+}
+/* PAGINAS GENERALES DE SIGA */
+
+.pagina-siga {
+    background-color: #f4f9fc;
+    padding: 60px 30px;
+    min-height: 500px;
+}
+
+.pagina-contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pagina-contenedor h1 {
+    color: #12345a;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.pagina-contenido {
+    background-color: white;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.07);
+}
+
+/* ACCESOS RAPIDOS DEL PANEL DEL VECINO */
+
+.panel-accesos {
+    margin-top: 35px;
+    margin-bottom: 40px;
+}
+
+.panel-accesos-encabezado {
+    margin-bottom: 24px;
+}
+
+.panel-accesos-encabezado h2 {
+    font-size: 26px;
+    color: #0D47A1;
+    margin-bottom: 8px;
+}
+
+.panel-accesos-encabezado p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+.panel-accesos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Tres tarjetas arriba y dos centradas abajo */
+.panel-accesos-grid > .panel-acceso {
+    grid-column: span 2;
+}
+
+.panel-accesos-grid > .panel-acceso:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.panel-accesos-grid > .panel-acceso:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+.panel-acceso {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-acceso:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(13, 71, 161, 0.10);
+}
+
+.panel-acceso-icono {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.panel-acceso h3 {
+    color: #0D47A1;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.panel-acceso p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.panel-acceso-pendiente {
+    display: inline-block;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* DISEÑO RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .panel-accesos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-accesos-grid > .panel-acceso,
+    .panel-accesos-grid > .panel-acceso:nth-child(4),
+    .panel-accesos-grid > .panel-acceso:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .panel-accesos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-acceso {
+        padding: 20px;
+    }
+}
+
+/* ICONOS SVG DEL PANEL SIGA */
+
+.panel-vecino .panel-icono,
+.panel-vecino .panel-acceso-icono {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    font-size: initial;
+}
+
+.panel-vecino .panel-icono svg,
+.panel-vecino .panel-acceso-icono svg {
+    width: 27px;
+    height: 27px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.panel-vecino .icono-agua {
+    background-color: #E0F7FA;
+    color: #00ACC1;
+}
+
+.panel-vecino .icono-reclamos {
+    background-color: #E8F0FE;
+    color: #0D47A1;
+}
+
+.panel-vecino .icono-facturas {
+    background-color: #EEF2FF;
+    color: #4F46E5;
+}
+
+.panel-vecino .icono-estado {
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.panel-vecino .icono-cortes {
+    background-color: #FFF3E0;
+    color: #D97706;
+}
+
+/* ACCESO A VIVIENDAS */
+
+.panel-vecino .icono-viviendas {
+    background-color: #E8F0FE;
+    color: #0D47A1;
+}
+
+.panel-acceso-enlace {
+    display: inline-block;
+    color: #0D47A1;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+.panel-acceso-enlace:hover {
+    color: #00ACC1;
+    text-decoration: underline;
+}
+
+
+/* ==============================================================
+   SIGA PC4 - ESTILO UNIFICADO DE PAGINAS Y MODULOS
+   Solo presentacion: no cambia PHP, formularios ni base de datos.
+   Incluye viviendas, reclamos, seguimiento, cortes y paginas base.
+   ============================================================== */
+
+/* Encabezados y texto de las paginas interiores */
+.pagina-siga .pagina-contenedor > h1 {
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+}
+
+.pagina-siga .pagina-contenido {
+    color: #334155;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.pagina-siga .pagina-contenido h2 {
+    color: #12345a;
+    font-size: 25px;
+    line-height: 1.3;
+    margin: 24px 0 18px;
+}
+
+.pagina-siga .pagina-contenido h2:first-child { margin-top: 0; }
+
+.pagina-siga .pagina-contenido h3 {
+    color: #12345a;
+    font-size: 19px;
+    margin: 22px 0 12px;
+}
+
+.pagina-siga .pagina-contenido p {
+    line-height: 1.7;
+}
+
+/* Formularios de viviendas, reclamos y futuras secciones SIGA */
+.pagina-siga .pagina-contenido form {
+    background: #f8fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px;
+    margin: 20px 0 32px;
+}
+
+.pagina-siga .pagina-contenido form p { margin: 0 0 20px; }
+.pagina-siga .pagina-contenido form p:last-child { margin-bottom: 0; }
+
+.pagina-siga .pagina-contenido form label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.pagina-siga .pagina-contenido form select,
+.pagina-siga .pagina-contenido form input[type="text"],
+.pagina-siga .pagina-contenido form textarea,
+.pagina-siga .pagina-contenido form input[type="number"],
+.pagina-siga .pagina-contenido form input[type="date"] {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 600px;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1f2937;
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.pagina-siga .pagina-contenido form textarea {
+    min-height: 135px;
+    resize: vertical;
+}
+
+.pagina-siga .pagina-contenido form select:focus,
+.pagina-siga .pagina-contenido form input[type="text"]:focus,
+.pagina-siga .pagina-contenido form input[type="number"]:focus,
+.pagina-siga .pagina-contenido form input[type="date"]:focus,
+.pagina-siga .pagina-contenido form textarea:focus {
+    border-color: #00acc1;
+    box-shadow: 0 0 0 3px rgba(0, 172, 193, .12);
+}
+
+.pagina-siga .pagina-contenido form button[type="submit"],
+.pagina-siga .pagina-contenido form input[type="submit"] {
+    display: inline-block;
+    padding: 13px 23px;
+    border: 0;
+    border-radius: 10px;
+    background: #0d47a1;
+    color: #ffffff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.pagina-siga .pagina-contenido form button[type="submit"]:hover,
+.pagina-siga .pagina-contenido form input[type="submit"]:hover {
+    background: #083579;
+    transform: translateY(-1px);
+}
+
+.pagina-siga .pagina-contenido form button[type="submit"]:focus-visible,
+.pagina-siga .pagina-contenido a:focus-visible {
+    outline: 3px solid #00acc1;
+    outline-offset: 3px;
+}
+
+.pagina-siga .pagina-contenido form a {
+    display: inline-block;
+    margin-left: 12px;
+    color: #0d47a1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pagina-siga .pagina-contenido form a:hover { text-decoration: underline; }
+
+/* Tablas: viviendas, mis reclamos y otros listados de modulos */
+.pagina-siga .pagina-contenido table {
+    width: 100% !important;
+    border: none !important;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    margin: 18px 0 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px #e2e8f0;
+    font-size: 14px;
+}
+
+.pagina-siga .pagina-contenido table thead {
+    background: #e8f0fe;
+}
+
+.pagina-siga .pagina-contenido table th,
+.pagina-siga .pagina-contenido table td {
+    border: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 15px 14px;
+    text-align: left;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+.pagina-siga .pagina-contenido table th {
+    color: #0d47a1;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pagina-siga .pagina-contenido table tr:last-child td { border-bottom: none !important; }
+.pagina-siga .pagina-contenido table tbody tr:nth-child(even) { background: #f8fafc; }
+.pagina-siga .pagina-contenido table tbody tr:hover { background: #f0f9ff; }
+
+.pagina-siga .pagina-contenido table a {
+    display: inline-block;
+    padding: 7px 10px;
+    margin: 2px 3px 2px 0;
+    border-radius: 7px;
+    background: #e8f0fe;
+    color: #0d47a1;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pagina-siga .pagina-contenido table a:hover { background: #d1e3ff; }
+
+/* Viviendas: el formulario de PC1 usa el identificador #siga_barrio */
+.pagina-siga .pagina-contenido:has(#siga_barrio) form {
+    max-width: none;
+}
+
+/* Nuevo reclamo: ampliar los selectores y la descripcion */
+.pagina-siga .pagina-contenido:has(#vivienda_id) form label {
+    display: block;
+}
+
+.pagina-siga .pagina-contenido:has(#vivienda_id) form textarea {
+    width: 100%;
+}
+
+/* Historial de reclamos del PC2 */
+.pagina-siga .pagina-contenido .siga-historial {
+    background: #f8fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.pagina-siga .pagina-contenido .siga-historial > h2 { margin-top: 0; }
+
+.pagina-siga .pagina-contenido .siga-historial ol {
+    list-style: none;
+    margin: 24px 0 0 8px;
+    padding: 0 0 0 26px;
+    border-left: 2px solid #bfdbfe;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li {
+    position: relative;
+    padding: 3px 0 20px 14px;
+    margin: 0;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    background: #0d47a1;
+    box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.pagina-siga .pagina-contenido .siga-historial ol > li strong { color: #0d47a1; }
+.pagina-siga .pagina-contenido .siga-historial ol > li p { margin: 5px 0 0; }
+
+/* Respuestas informativas y avisos en paginas internas */
+.pagina-siga .pagina-contenido p[role="status"] {
+    padding: 12px 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    background: #f0fdf4;
+    font-weight: 600;
+}
+
+/* Respetar las clases del CSS de PC2 sin modificar sus archivos */
+.pagina-siga .pagina-contenido .siga-pc2 {
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Ajustes para tablet y celular */
+@media (max-width: 768px) {
+    .pagina-siga { padding: 40px 16px; }
+    .pagina-siga .pagina-contenido { padding: 20px; }
+    .pagina-siga .pagina-contenido form { padding: 18px; }
+    .pagina-siga .pagina-contenido .siga-historial { padding: 18px; }
+
+    .pagina-siga .pagina-contenido table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    .pagina-siga .pagina-contenido table td {
+        white-space: normal;
+        min-width: 85px;
+    }
+
+    .pagina-siga .pagina-contenedor > h1 { margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+    .pagina-siga .pagina-contenido form select,
+    .pagina-siga .pagina-contenido form input[type="text"],
+    .pagina-siga .pagina-contenido form textarea { max-width: 100%; }
+}
